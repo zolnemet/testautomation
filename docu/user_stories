@@ -1,0 +1,49 @@
+1.
+As an automated test user
+I need to know that cookies warning is displayed on page
+So that I can accept or reject all cookies
+
+2.
+As an automated test user
+I want to be able to change language to english
+So that I can reach the page in english
+
+3.
+As an automated test user
+I need to know that sign in button is available on the page
+So that I can sign in tesco.hu
+
+4.
+As an existing tesco user
+I want to sign in into tesco webshop
+So that I can reach my trolley
+
+5.
+As an automated test user
+I want to search "Gyermelyi spagetti 4 tojásos száraztészta"
+So that I can find it in the webshop (lang HU / lang EN)
+
+6.
+As an automated test user
+I want to add "Gyermelyi spagetti 4 tojásos száraztészta" into the trolley
+So that the added item is stored in the trolley
+
+7.
+As an automated test user
+I want to browse "Pékáru" / "Friss pékáru" / "Reggeliző termék" / "Sajtos pogácsa 85 g"
+So that I can see the picture of the item
+
+8.
+As an automated test user
+I want to add 2 pcs of "Sajtos pogácsa 85 g" into the trolley
+So that the added items are stored in the trolley
+
+9
+As an automated test user
+I want to remove 1 "Sajtos pogácsa 85 g" from the trolley
+So that the guide price be less than 1200 Ft
+
+10.
+As an automated test user
+I want to sign out from tesco.hu
+So that I can not reach a trolley anymore
