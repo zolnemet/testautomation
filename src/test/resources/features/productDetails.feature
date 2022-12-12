@@ -1,3 +1,4 @@
+@Details
 Feature: Product details
   As a logged user of tesco website
   find a product in showing products and open details of it

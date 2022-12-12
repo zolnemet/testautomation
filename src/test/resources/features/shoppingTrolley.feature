@@ -1,3 +1,4 @@
+@Trolley
 Feature: Shopping trolley
   As a logged user of tesco website
   I want to have a shopping trolley

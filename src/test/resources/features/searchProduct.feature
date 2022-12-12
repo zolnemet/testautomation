@@ -1,3 +1,4 @@
+@Search
 Feature: Searching products
   As a logged user of tesco website
   I need to be able search products

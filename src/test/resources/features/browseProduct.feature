@@ -1,3 +1,4 @@
+@Browse
 Feature: Browsing products
   As a logged user of tesco website
   I need to be able browse products
