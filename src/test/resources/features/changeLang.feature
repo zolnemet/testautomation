@@ -6,7 +6,7 @@ Feature: change language
   Rule: It is allowed to change the language
 
     Background:
-      Given open main page
+      Given open the main page
       And accept cookies
 
     Scenario: Change the language to hungarian

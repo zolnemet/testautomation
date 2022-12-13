@@ -5,15 +5,14 @@ Feature: Product details
   To check the description and the add button
 
   Background:
-    Given open main page
+    Given open the main page
     And accept cookies
-    And language is set to "hungarian"
-    And user login
-    And product search
+    And the language is set to "hungarian"
+    And user logged in
+    And product search succeeded
 
   Scenario Outline: Product details 01 - Open product details
-    Given I am logged in
-    And I can see the "<product>" in results
+    Given I can see the "<product>" in results
     When I click on "<product>" picture
     Then I can see the picture of <product> on the product details page
     Examples:
@@ -21,8 +20,7 @@ Feature: Product details
       | Sajtos pogácsa 85 g   |
 
   Scenario Outline: Product details 02 - Check product description
-    Given I am logged in
-    And I can see the "<product>" in results
+    Given I can see the "<product>" in results
     When I click on "<product>" picture
     Then I can see the <product> on the product details page
     And I can see the <ingredients> of the product

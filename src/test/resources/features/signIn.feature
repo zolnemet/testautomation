@@ -4,11 +4,13 @@ Feature: login
   I need to be able to log in
   To access my trolley
 
+  Rule: It is allowed to login in web-shop and reach a shopping trolley
+
   Background:
-    Given open main page
+    Given open the main page
     And accept cookies
-    And language is set to "hungarian"
-    And user login
+    And the language is set to "hungarian"
+    And login page opened
 
   Scenario: Login failed
     Given I am on the login page

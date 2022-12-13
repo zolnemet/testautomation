@@ -5,10 +5,10 @@ Feature: Shopping trolley
   So that I can see the products and costs of what I want to purchase
 
   Background:
-    Given open main page
+    Given open the main page
     And accept cookies
-    And language is set to "hungarian"
-    And user login
+    And the language is set to "hungarian"
+    And user logged in
 
   Scenario Outline: Trolley 01 - Add a product to trolley
     Given I open the "<product>" deatil page
