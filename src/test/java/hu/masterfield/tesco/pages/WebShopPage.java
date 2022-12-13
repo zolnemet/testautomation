@@ -30,15 +30,18 @@ public class WebShopPage {
         }
     }
 
-
     public String getLang() {
+        setLangvalue();
+        return this.lang;
+    }
+
+    private void setLangvalue() {
         if (buttonLanguage.innerText().equals("Magyar")){
-            lang = "English";
+            this.lang = "English";
         }
         else if (buttonLanguage.innerText().equals("English")){
-            lang = "Magyar";
+            this.lang = "Magyar";
         }
-        return lang;
     }
 
     public void changeLang() {
