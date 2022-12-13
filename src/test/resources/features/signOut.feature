@@ -8,10 +8,10 @@ Feature: logout
     Background:
       Given open the main page
       And accept cookies
-      And the language is set to "hungarian"
-      And user logged in
+      And language is set to "Magyar"
+      And I am logged in
 
     Scenario: Logout successful
       Given I am logged in
       When I sign out
-      Then No "Trolley" icon accessible
+      Then No trolley accessible

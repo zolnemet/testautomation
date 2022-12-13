@@ -54,9 +54,6 @@ public class WebShopPage {
     }
 
     public void validatePage() {
-
-//        buttonLanguage.shouldBe(visible);
-//        buttonSignIn.shouldBe(visible);
         buttonLanguage.shouldBe(visible).shouldBe(enabled);
         buttonSignIn.shouldBe(visible).shouldBe(enabled);
     }

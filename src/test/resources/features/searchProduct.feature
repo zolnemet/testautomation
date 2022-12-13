@@ -9,8 +9,8 @@ Feature: Searching products
     Background:
       Given open the main page
       And accept cookies
-      And the language is set to "hungarian"
-      And user logged in
+      And language is set to "Magyar"
+      And I am logged in
 
     Scenario Outline: Search product
       Given I am on the welcome page
