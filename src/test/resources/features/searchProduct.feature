@@ -4,7 +4,7 @@ Feature: Searching products
   I need to be able search products
   To find a product in the results
 
-  Rule: xc
+  Rule: It is allowed to search products
 
     Background:
       Given open the main page
