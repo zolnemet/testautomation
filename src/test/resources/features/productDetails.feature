@@ -16,8 +16,8 @@ Feature: Product details
     When I click on "<product>" picture
     Then I can see the picture of <product> on the product details page
     Examples:
-      | product               |
-      | Sajtos pogácsa 85 g   |
+      | product             |
+      | Sajtos pogácsa 85 g |
 
   Scenario Outline: Product details 02 - Check product description
     Given I can see the "<product>" in results
@@ -25,5 +25,5 @@ Feature: Product details
     Then I can see the <product> on the product details page
     And I can see the <ingredients> of the product
     Examples:
-      | product               | ingredients
-      | Sajtos pogácsa 85 g   | Búzaliszt BL 55, Ivóvíz, Leveles margarin [pálmazsír, ivóvíz, étkezési só
+      | product             | ingredients
+      | Sajtos pogácsa 85 g | Búzaliszt BL 55, Ivóvíz, Leveles margarin [pálmazsír, ivóvíz, étkezési só
