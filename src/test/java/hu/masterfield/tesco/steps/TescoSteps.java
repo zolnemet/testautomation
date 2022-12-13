@@ -13,6 +13,7 @@ import io.cucumber.java.en.When;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static com.codeborne.selenide.Selenide.open;
@@ -24,12 +25,15 @@ public class TescoSteps {
     WebShopPage webShopPage;
     LoginPage loginPage;
 
-    @RegisterExtension
-    static ScreenShooterExtension screenshotEmAll = new ScreenShooterExtension(true).to("target/screenshots");
+//    @RegisterExtension
+//    static ScreenShooterExtension screenshotEmAll = new ScreenShooterExtension(true).to("target/screenshots");
 
     @Before
     public void setup() {
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--disable-blink-features=AutomationControlled");
         System.setProperty("wdm.proxy", "HE202196.emea2.cds.t-internal.com:3128");
+        Configuration.browserCapabilities = options;
         Configuration.reportsFolder = "target/screenshots";
     }
 
@@ -37,31 +41,30 @@ public class TescoSteps {
     public void cleanup () {
     }
 
-
     @Given("open the main page")
     public void openTheMainPage() throws InterruptedException {
         webShopPage = open (baseUrl, WebShopPage.class);
-        Thread.sleep(5000);
+        //Thread.sleep(5000);
         webShopPage.validatePage();
-        Thread.sleep(5000);
+        //Thread.sleep(5000);
     }
 
     @And("accept cookies")
     public void acceptCookies() throws InterruptedException {
         webShopPage.acceptCoockies();
         webShopPage.validateCookiesAccepted();
-        Thread.sleep(5000);
+        //Thread.sleep(5000);
     }
 
     @Given("language is set to {string}")
     public void languageIsSetTo(String lang) {
-        if (webShopPage.getLang().equalsIgnoreCase(lang)) {
+        if (!webShopPage.getLang().equals(lang)) {
             webShopPage.changeLang();
         }
     }
 
     @When("change the language to {string}")
-    public void changeTheLanguageTo(String lang) throws Throwable {
+    public void changeTheLanguageTo(String lang) {
         languageIsSetTo(lang);
     }
 
