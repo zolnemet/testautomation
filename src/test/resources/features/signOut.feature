@@ -9,7 +9,7 @@ Feature: logout
       Given open the main page
       And accept cookies
       And language is set to "Magyar"
-      And I am logged in
+      And user login
 
     Scenario: Logout successful
       Given I am logged in

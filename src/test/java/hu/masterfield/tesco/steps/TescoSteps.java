@@ -110,4 +110,10 @@ public class TescoSteps {
     public void noTrolleyAccessible() {
         productsPage.validateMissingTrolley();
     }
+
+    @And("user login")
+    public void userLogin() {
+        iAmOnTheLoginPage();
+        loginAccountWith("zoltan.n@freemail.hu", "teszt.01");
+    }
 }

@@ -12,14 +12,10 @@ public class LoginPage {
     SelenideElement txtBoxPassword = $(byId("password"));
     SelenideElement buttonSignIn = $(byText("Bejelentkezés"));
 
-    private void login(String email, String password) {
+    public ProductsPage loginAccount(String email, String password) {
         txtBoxEmail.setValue(email);
         txtBoxPassword.setValue(password);
-        buttonSignIn.click();
-    }
-
-    public ProductsPage loginAccount(String email, String password) {
-        login(email, password);
+        txtBoxPassword.pressEnter();
         return new ProductsPage();
     }
 
