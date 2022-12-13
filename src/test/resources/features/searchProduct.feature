@@ -10,20 +10,23 @@ Feature: Searching products
       Given open the main page
       And accept cookies
       And language is set to "Magyar"
-      And I am logged in
+      And user login
 
-    Scenario Outline: Search product
-      Given I am on the welcome page
-      When I fill in "Keresés" with "<product>"
-      And I click on the search button
+    Scenario: Search product
+      Given I am on the products page
+      When I search product for "Dreher Bitter Lager"
+      Then I should see the "Dreher Bitter Lager" in results
+
+    Scenario Outline: Search products from examples
+      Given I am on the products page
+      When I search product for "<product>"
       Then I should see the <product> in results
       Examples:
         | product                                   |
         | Gyermelyi spagetti 4 tojásos száraztészta |
         | Sajtos pogácsa 85 g                       |
 
-    Scenario: Search invalid product
-      Given I am on the welcome page
-      When I fill in "Keresés" with "xyz"
-      And I click on the search button
-      Then I should not see any product in results
+#    Scenario: Search invalid product
+#      Given I am on the products page
+#      When I search product for "xyz"
+#      Then I should not see any product in results

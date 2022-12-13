@@ -17,11 +17,7 @@ public class WebShopPage {
     String lang = null;
 
     SelenideElement buttonCookies = $(byText("Minden Cookie elfogadása"));
-    //SelenideElement buttonCookies = $(byClassName("base-components__BaseElement-sc-1mosoyj-0 styled__TextSpan-rsekm1-4 oznwo GDiMp beans-button__text"));
-
     SelenideElement buttonLanguage = $(byId("utility-header-language-switch-link"));
-//    SelenideElement buttonLanguageHu = $(byLinkText("Magyar"));
-//    SelenideElement buttonLanguageEn = $(byLinkText("English"));
     SelenideElement buttonSignIn = $(byId("utility-header-login-link"));
 
     public void acceptCoockies(){

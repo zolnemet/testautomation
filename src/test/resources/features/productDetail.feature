@@ -10,7 +10,7 @@ Feature: Product details
       Given open the main page
       And accept cookies
       And language is set to "Magyar"
-      And I am logged in
+      And user login
       And product search succeeded
 
     Scenario Outline: Product details 01 - Open product details

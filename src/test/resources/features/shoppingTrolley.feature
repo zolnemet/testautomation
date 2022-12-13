@@ -10,7 +10,7 @@ Feature: Shopping trolley
       Given open the main page
       And accept cookies
       And language is set to "Magyar"
-      And I am logged in
+      And user login
 
     Scenario Outline: Trolley 01 - Add a product to trolley
       Given I open the "<product>" deatil page

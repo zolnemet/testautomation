@@ -5,6 +5,7 @@ import com.codeborne.selenide.SelenideElement;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Selectors.byId;
+import static com.codeborne.selenide.Selectors.byPartialLinkText;
 import static com.codeborne.selenide.Selenide.$;
 
 public class ProductsPage {
@@ -14,6 +15,17 @@ public class ProductsPage {
     SelenideElement buttonLogout = $(byId("utility-header-logout-link"));
     SelenideElement objectMiniTrolley = $(byId("mini-trolley"));
 
+    public void search (String productName) {
+        inputSearch.clear();
+        inputSearch.setValue(productName);
+        inputSearch.pressEnter();
+    }
+
+    public void validateProduct (String productName) {
+        SelenideElement product = $(byPartialLinkText(productName));
+        product.should(exist).shouldBe(visible);
+        System.out.println(product.innerText());
+    }
 
     public WebShopPage logout(){
         buttonLogout.click();

@@ -116,4 +116,14 @@ public class TescoSteps {
         iAmOnTheLoginPage();
         loginAccountWith("zoltan.n@freemail.hu", "teszt.01");
     }
+
+    @When("I search product for {string}")
+    public void searchProductFor(String productName) {
+        productsPage.search(productName);
+    }
+
+    @Then("I should see the {string} in results")
+    public void isProductInResults(String productName) {
+        productsPage.validateProduct(productName);
+    }
 }

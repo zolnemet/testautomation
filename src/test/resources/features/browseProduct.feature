@@ -10,7 +10,7 @@ Feature: Browsing products
       Given open the main page
       And accept cookies
       And language is set to "Magyar"
-      And I am logged in
+      And user login
 
     Scenario: Browse product
       Given I am on the welcome page
