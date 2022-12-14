@@ -2,6 +2,7 @@ package hu.masterfield.tesco.steps;
 
 import com.codeborne.selenide.Configuration;
 import hu.masterfield.tesco.pages.LoginPage;
+import hu.masterfield.tesco.pages.ProductPage;
 import hu.masterfield.tesco.pages.WebShopPage;
 import hu.masterfield.tesco.pages.HomePage;
 import hu.masterfield.util.Crypting;
@@ -23,6 +24,7 @@ public class TescoSteps {
     HomePage homePage;
     LoginPage loginPage;
     WebShopPage webShopPage;
+    ProductPage productPage;
 
 //    @RegisterExtension
 //    static ScreenShooterExtension screenshotEmAll = new ScreenShooterExtension(true).to("target/screenshots");
@@ -53,7 +55,7 @@ public class TescoSteps {
     }
 
     @Given("language is set to {string}")
-    public void languageIsSetTo(String lang) {
+    public void setLanguageTo(String lang) {
         if (!homePage.getLang().equals(lang)) {
             homePage.changeLang();
         }
@@ -61,7 +63,7 @@ public class TescoSteps {
 
     @When("change the language to {string}")
     public void changeTheLanguageTo(String lang) {
-        languageIsSetTo(lang);
+        setLanguageTo(lang);
     }
 
     @Then("it shows elements in {string}")
@@ -76,8 +78,17 @@ public class TescoSteps {
     }
 
     @When("I login account with {string} and {string}")
-    public void loginAccountWith(String email, String password) {
+    public void loginWith(String email, String password) {
         webShopPage = loginPage.loginAccount(email, password);
+    }
+
+    @And("login as test user")
+    public void loginAsTestUser() throws InterruptedException {
+        iAmOnTheLoginPage();
+        String testUser = testData.getProperty("testUser");
+        String codedTestPass = testData.getProperty("testPass");
+        String testPass = Crypting.decrypt("Bar12345Bar12345", "RandomInitVector", codedTestPass);
+        loginWith(testUser, testPass);
     }
 
     @Then("I am on the products page")
@@ -86,14 +97,14 @@ public class TescoSteps {
     }
 
     @And("I should see the Trolley icon")
-    public void iShouldSeeTheTrolleyIcon() {
+    public void isTrolleyIconVisible() {
         webShopPage.validateTrolley();
     }
 
     @Given("I am logged in")
     public void iAmLoggedIn() {
         iAmOnTheProductsPage();
-        iShouldSeeTheTrolleyIcon();
+        isTrolleyIconVisible();
     }
 
     @When("I sign out")
@@ -102,31 +113,34 @@ public class TescoSteps {
         homePage.validatePage();
     }
 
-
     @Then("No trolley accessible")
     public void noTrolleyAccessible() {
         webShopPage.validateMissingTrolley();
     }
 
-    @And("user login")
-    public void userLogin() throws InterruptedException {
-        iAmOnTheLoginPage();
-        String testUser = testData.getProperty("testUser");
-        String codedTestPass = testData.getProperty("testPass");
-        String testPass = Crypting.decrypt("Bar12345Bar12345", "RandomInitVector", codedTestPass);
-        loginAccountWith(testUser, testPass);
+    @When("I search for a product with {string}")
+    public void searchProductWith(String productName) {
+        webShopPage = webShopPage.search(productName);
+        webShopPage.validateProduct(productName);
     }
 
-
-    @When("I search product for {string}")
-    public void searchProductFor(String productName) {
-        webShopPage.search(productName);
-    }
-
-    @Then("I should see the {string} in results")
+    @Then("I can see the {string} in results")
     public void isProductInResults(String productName) {
         webShopPage.validateProduct(productName);
     }
 
+    @When("I open {string} detail")
+    public void openProductDetail (String productName) {
+        productPage = webShopPage.clickOnProductName(productName);
+    }
 
+    @Then("I can see the {string} on the product details page")
+    public void isProductOnDetailsPage(String productName) {
+        productPage.validateProduct(productName);
+    }
+
+    @And("I can see the {string} of the product")
+    public void isProductIngredientsVisible(String productIngredient) {
+        productPage.validateIngredients(productIngredient);
+    }
 }

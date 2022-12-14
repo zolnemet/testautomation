@@ -15,16 +15,11 @@ public class WebShopPage {
     SelenideElement buttonLogout = $(byId("utility-header-logout-link"));
     SelenideElement objectMiniTrolley = $(byId("mini-trolley"));
 
-    public void search (String productName) {
+    public WebShopPage search (String productName) {
         inputSearch.clear();
         inputSearch.setValue(productName);
         inputSearch.pressEnter();
-    }
-
-    public void validateProduct (String productName) {
-        SelenideElement product = $(byPartialLinkText(productName));
-        product.should(exist);
-        //System.out.println(product.innerText());
+        return new WebShopPage();
     }
 
     public HomePage logout(){
@@ -34,7 +29,20 @@ public class WebShopPage {
 
     public void validatePage() {
         buttonLogout.shouldBe(visible).shouldBe(enabled);
+        buttonGreetings.shouldBe(visible).shouldBe(enabled);
         inputSearch.shouldBe(visible).shouldBe(enabled);
+    }
+
+    public void validateProduct (String productName) {
+        SelenideElement product = $(byPartialLinkText(productName));
+        product.should(exist);
+        //System.out.println(product.innerText());
+    }
+
+    public ProductPage clickOnProductName(String productName) {
+        SelenideElement product = $(byPartialLinkText(productName));
+        product.should(exist);
+        return new ProductPage();
     }
 
     public boolean validateUserLoggedIn () {
