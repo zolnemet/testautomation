@@ -8,15 +8,15 @@ import static com.codeborne.selenide.Selenide.$;
 
 public class LoginPage {
 
-    SelenideElement txtBoxEmail = $(byId("email"));
+    SelenideElement txtBoxEmail = $("#email");
     SelenideElement txtBoxPassword = $(byId("password"));
     SelenideElement buttonSignIn = $(byText("Bejelentkezés"));
 
-    public ProductsPage loginAccount(String email, String password) {
+    public WebShopPage loginAccount(String email, String password) {
         txtBoxEmail.setValue(email);
         txtBoxPassword.setValue(password);
         txtBoxPassword.pressEnter();
-        return new ProductsPage();
+        return new WebShopPage();
     }
 
     public void validatePage() {

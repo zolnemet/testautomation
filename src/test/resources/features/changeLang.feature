@@ -19,11 +19,12 @@ Feature: change language
       When change the language to "Magyar"
       Then it shows elements in "Magyar"
 
-#    @DataTable
-#    Scenario: Change language with datatable
-#      Given language is set to "hungarian"
-#      When change the language to "english"
-#      Then it shows elements in "english" with
-#        | language  | login_button_name |
-#        | hungarian | Bejelentkezés     |
-#        | english   | Sign in           |
+    @DataTable
+    Scenario Outline: Change language with datatable
+      Given language is set to "<languageFrom>"
+      When change the language to "<languageTo>"
+      Then it shows elements in "<languageTo>"
+      Examples:
+        | languageFrom | languageTo |
+        | Magyar       | English    |
+        | English      | Magyar     |

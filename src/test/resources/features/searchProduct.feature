@@ -16,15 +16,19 @@ Feature: Searching products
       Given I am on the products page
       When I search product for "Dreher Bitter Lager"
       Then I should see the "Dreher Bitter Lager" in results
+      And I sign out
 
-    Scenario Outline: Search products from examples
+    @DataTable
+    Scenario Outline: Search product
       Given I am on the products page
       When I search product for "<product>"
-      Then I should see the <product> in results
+      Then I should see the "<product>" in results
+      And I sign out
       Examples:
         | product                                   |
         | Gyermelyi spagetti 4 tojásos száraztészta |
         | Sajtos pogácsa 85 g                       |
+        | Fehér bor                                 |
 
 #    Scenario: Search invalid product
 #      Given I am on the products page

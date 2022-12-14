@@ -1,31 +1,28 @@
 package hu.masterfield.tesco.steps;
 
 import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.junit5.ScreenShooterExtension;
 import hu.masterfield.tesco.pages.LoginPage;
-import hu.masterfield.tesco.pages.ProductsPage;
 import hu.masterfield.tesco.pages.WebShopPage;
+import hu.masterfield.tesco.pages.HomePage;
+import hu.masterfield.util.Crypting;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.junit.jupiter.api.extension.RegisterExtension;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static com.codeborne.selenide.Selenide.open;
+import static hu.masterfield.tesco.TestData.testData;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TescoSteps {
 
-    String baseUrl =  "https://bevasarlas.tesco.hu/groceries/hu-HU";
-    WebShopPage webShopPage;
+    String baseUrl = testData.getProperty("testUrl");
+    HomePage homePage;
     LoginPage loginPage;
-    ProductsPage productsPage;
+    WebShopPage webShopPage;
 
 //    @RegisterExtension
 //    static ScreenShooterExtension screenshotEmAll = new ScreenShooterExtension(true).to("target/screenshots");
@@ -40,25 +37,25 @@ public class TescoSteps {
     }
 
     @After
-    public void cleanup () {
+    public void cleanup() {
     }
 
     @Given("open the main page")
     public void openTheMainPage() throws InterruptedException {
-        webShopPage = open (baseUrl, WebShopPage.class);
-        webShopPage.validatePage();
+        homePage = open(baseUrl, HomePage.class);
+        homePage.validatePage();
     }
 
     @And("accept cookies")
     public void acceptCookies() throws InterruptedException {
-        webShopPage.acceptCoockies();
-        webShopPage.validateCookiesAccepted();
+        homePage.acceptCoockies();
+        homePage.validateCookiesAccepted();
     }
 
     @Given("language is set to {string}")
     public void languageIsSetTo(String lang) {
-        if (!webShopPage.getLang().equals(lang)) {
-            webShopPage.changeLang();
+        if (!homePage.getLang().equals(lang)) {
+            homePage.changeLang();
         }
     }
 
@@ -69,28 +66,28 @@ public class TescoSteps {
 
     @Then("it shows elements in {string}")
     public void itShowsElementsIn(String lang) {
-        assertEquals(lang, webShopPage.getLang());
+        assertEquals(lang, homePage.getLang());
     }
 
     @Given("I am on the login page")
     public void iAmOnTheLoginPage() {
-        loginPage = webShopPage.openLogin();
+        loginPage = homePage.openLogin();
         loginPage.validatePage();
     }
 
     @When("I login account with {string} and {string}")
     public void loginAccountWith(String email, String password) {
-        productsPage = loginPage.loginAccount(email,password);
+        webShopPage = loginPage.loginAccount(email, password);
     }
 
     @Then("I am on the products page")
     public void iAmOnTheProductsPage() {
-        productsPage.validatePage();
+        webShopPage.validatePage();
     }
 
     @And("I should see the Trolley icon")
     public void iShouldSeeTheTrolleyIcon() {
-        productsPage.validateTrolley();
+        webShopPage.validateTrolley();
     }
 
     @Given("I am logged in")
@@ -101,29 +98,35 @@ public class TescoSteps {
 
     @When("I sign out")
     public void signOut() {
-        webShopPage = productsPage.logout();
-        webShopPage.validatePage();
+        homePage = webShopPage.logout();
+        homePage.validatePage();
     }
 
 
     @Then("No trolley accessible")
     public void noTrolleyAccessible() {
-        productsPage.validateMissingTrolley();
+        webShopPage.validateMissingTrolley();
     }
 
     @And("user login")
-    public void userLogin() {
+    public void userLogin() throws InterruptedException {
         iAmOnTheLoginPage();
-        loginAccountWith("zoltan.n@freemail.hu", "teszt.01");
+        String testUser = testData.getProperty("testUser");
+        String codedTestPass = testData.getProperty("testPass");
+        String testPass = Crypting.decrypt("Bar12345Bar12345", "RandomInitVector", codedTestPass);
+        loginAccountWith(testUser, testPass);
     }
+
 
     @When("I search product for {string}")
     public void searchProductFor(String productName) {
-        productsPage.search(productName);
+        webShopPage.search(productName);
     }
 
     @Then("I should see the {string} in results")
     public void isProductInResults(String productName) {
-        productsPage.validateProduct(productName);
+        webShopPage.validateProduct(productName);
     }
+
+
 }

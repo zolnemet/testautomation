@@ -1,61 +1,52 @@
 package hu.masterfield.tesco.pages;
 
-import com.codeborne.selenide.Selectors;
 import com.codeborne.selenide.SelenideElement;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.PageFactory;
 
 import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Condition.enabled;
+import static com.codeborne.selenide.Selectors.byId;
+import static com.codeborne.selenide.Selectors.byPartialLinkText;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.title;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class WebShopPage {
 
-    String lang = null;
+    SelenideElement buttonGreetings = $(byId("utility-header-greetings"));
+    SelenideElement inputSearch = $(byId("search-input"));
+    SelenideElement buttonLogout = $(byId("utility-header-logout-link"));
+    SelenideElement objectMiniTrolley = $(byId("mini-trolley"));
 
-    SelenideElement buttonCookies = $(byText("Minden Cookie elfogadása"));
-    SelenideElement buttonLanguage = $(byId("utility-header-language-switch-link"));
-    SelenideElement buttonSignIn = $(byId("utility-header-login-link"));
-
-    public void acceptCoockies(){
-        if (buttonCookies.isDisplayed()) {
-            buttonCookies.click();
-        }
+    public void search (String productName) {
+        inputSearch.clear();
+        inputSearch.setValue(productName);
+        inputSearch.pressEnter();
     }
 
-    public String getLang() {
-        setLangvalue();
-        return this.lang;
+    public void validateProduct (String productName) {
+        SelenideElement product = $(byPartialLinkText(productName));
+        product.should(exist);
+        //System.out.println(product.innerText());
     }
 
-    private void setLangvalue() {
-        if (buttonLanguage.innerText().equals("Magyar")){
-            this.lang = "English";
-        }
-        else if (buttonLanguage.innerText().equals("English")){
-            this.lang = "Magyar";
-        }
-    }
-
-    public void changeLang() {
-        buttonLanguage.click();
-    }
-
-    public LoginPage openLogin(){
-        buttonSignIn.click();
-        return new LoginPage();
+    public HomePage logout(){
+        buttonLogout.click();
+        return new HomePage();
     }
 
     public void validatePage() {
-        buttonLanguage.shouldBe(visible).shouldBe(enabled);
-        buttonSignIn.shouldBe(visible).shouldBe(enabled);
+        buttonLogout.shouldBe(visible).shouldBe(enabled);
+        inputSearch.shouldBe(visible).shouldBe(enabled);
     }
 
-    public void validateCookiesAccepted() {
-        buttonCookies.shouldNotBe(exist);
+    public boolean validateUserLoggedIn () {
+        return buttonLogout.isDisplayed();
+    }
+
+    public void validateTrolley() {
+        objectMiniTrolley.should(exist).shouldBe(visible);
+    }
+
+    public void validateMissingTrolley() {
+        objectMiniTrolley.shouldNot(exist);
     }
 
 }
