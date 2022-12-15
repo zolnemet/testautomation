@@ -13,7 +13,12 @@ public class WebShopPage {
     SelenideElement buttonGreetings = $(byId("utility-header-greetings"));
     SelenideElement inputSearch = $(byId("search-input"));
     SelenideElement buttonLogout = $(byId("utility-header-logout-link"));
-    SelenideElement objectMiniTrolley = $(byId("mini-trolley"));
+    //SelenideElement objectMiniTrolley = $(byId("mini-trolley"));
+    SelenideElement buttonTrolleyContent = $("#mini-trolley > div.sc-ikJyIC.hkPkEY > a > span");
+
+    SelenideElement buttonAdd = $("beans-quantity-controls__add-button.beans-button__container > span");
+    SelenideElement buttonRemove = $("beans-quantity-controls__remove-button.beans-button__container > span");
+
 
     public WebShopPage search (String productName) {
         inputSearch.clear();
@@ -42,7 +47,13 @@ public class WebShopPage {
     public ProductPage clickOnProductName(String productName) {
         SelenideElement product = $(byPartialLinkText(productName));
         product.should(exist);
+        product.click();
         return new ProductPage();
+    }
+
+    public TrolleyPage clickOnTrolley(){
+        buttonTrolleyContent.click();
+        return new TrolleyPage();
     }
 
     public boolean validateUserLoggedIn () {
@@ -50,11 +61,11 @@ public class WebShopPage {
     }
 
     public void validateTrolley() {
-        objectMiniTrolley.should(exist).shouldBe(visible);
+        buttonTrolleyContent.should(exist).shouldBe(visible);
     }
 
     public void validateMissingTrolley() {
-        objectMiniTrolley.shouldNot(exist);
+        buttonTrolleyContent.shouldNot(exist);
     }
 
 }

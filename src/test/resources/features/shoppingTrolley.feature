@@ -10,36 +10,37 @@ Feature: Shopping trolley
       Given open the main page
       And accept cookies
       And language is set to "Magyar"
-      And user login
+      And login as test user
+      And I am on the webshop page
 
-    Scenario Outline: Trolley 01 - Add a product to trolley
-      Given I open the "<product>" deatil page
-      And I am on a product detail page of the "<product>"
-      When I set quantity to "<quantity>"
-      And I click the "Hozzáad" button
-      Then the product is added to my shopping trolley
+    Scenario: Trolley - Open the shopping trolley
+      When I open shopping trolley
+      Then I am on the "Kosár" page
+
+    Scenario: Trolley - Empty the shopping trolley
+      Given I open shopping trolley
+      And I am on the "Kosár" page
+      When I remove items from the trolley
+      Then I can see that trolley is empty
+
+    Scenario Outline: Trolley - Add a product to trolley
+      When I add "<quantity>" of "<product>" to the Trolley
+      And I open shopping trolley
+      Then the "<product>" is added to my "Kosár"
       Examples:
         | product                                   | quantity
         | Gyermelyi spagetti 4 tojásos száraztészta | 1
         | Sajtos pogácsa 85 g                       | 3
 
-    Scenario: Trolley 02 - Open the shopping trolley
-      Given I have added an item of "Gyermelyi spagetti 4 tojásos száraztészta" to my shopping trolley
-      When I click the shopping trolley icon
-      Then I land on the "Kosár" page
-      And I can see the product in my shopping trolley
+#
+#
+#    Scenario: Trolley 03 - Modify the quantity of a product in shopping trolley
+#      Given I have added 3 of the item of "Sajtos pogácsa 85 g" to my shopping trolley
+#      When I click the shopping trolley icon
+#      And I am on the "Kosár" page
+#      And I can see the product in my shopping trolley
+#      And I can decrease the quantity of a product in shopping trolley
+#      Then I can see the modified quantity of the product in shopping trolley
+#
 
-    Scenario: Trolley 03 - Modify the quantity of a product in shopping trolley
-      Given I have added 3 of the item of "Sajtos pogácsa 85 g" to my shopping trolley
-      When I click the shopping trolley icon
-      And I am on the "Kosár" page
-      And I can see the product in my shopping trolley
-      And I can decrease the quantity of a product in shopping trolley
-      Then I can see the modified quantity of the product in shopping trolley
-
-    Scenario: Trolley 04 - Empty trolley
-      Given I have added any items to my shopping trolley
-      When I click the "Kosár ürítése" button
-      And I click on "Törlés" button in popup window
-      Then I can see that "trolley is empty" or "A kosarad jelenleg üres"
-
+#

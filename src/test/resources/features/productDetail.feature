@@ -6,19 +6,17 @@ Feature: Product details
 
   Rule: It is allowed to open product details page and check product description
 
-#    Background:
-#      Given open the main page
-
-    Scenario: Product details - Initial login steps
+    Background:
       Given open the main page
       And accept cookies
       And language is set to "Magyar"
-      When login as test user
-      Then I am on the products page
+      And login as test user
+      And I am on the webshop page
 
     Scenario Outline: Product - Open product details
       Given I search for a product with "<product>"
       When I open "<product>" detail
+      And I am on the product page
       Then I can see the "<product>" on the product details page
       Examples:
         | product             |

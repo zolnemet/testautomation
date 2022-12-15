@@ -1,12 +1,12 @@
 package hu.masterfield.tesco.steps;
 
 import com.codeborne.selenide.Configuration;
-import hu.masterfield.tesco.pages.LoginPage;
-import hu.masterfield.tesco.pages.ProductPage;
-import hu.masterfield.tesco.pages.WebShopPage;
-import hu.masterfield.tesco.pages.HomePage;
+import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.SelenideDriver;
+import hu.masterfield.tesco.pages.*;
 import hu.masterfield.util.Crypting;
 import io.cucumber.java.After;
+import io.cucumber.java.AfterAll;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -25,6 +25,7 @@ public class TescoSteps {
     LoginPage loginPage;
     WebShopPage webShopPage;
     ProductPage productPage;
+    TrolleyPage trolleyPage;
 
 //    @RegisterExtension
 //    static ScreenShooterExtension screenshotEmAll = new ScreenShooterExtension(true).to("target/screenshots");
@@ -40,7 +41,13 @@ public class TescoSteps {
 
     @After
     public void cleanup() {
+        Selenide.clearBrowserCookies();
     }
+
+//    @AfterAll
+//    public void quit() {
+//        Selenide.closeWindow();
+//    }
 
     @Given("open the main page")
     public void openTheMainPage() throws InterruptedException {
@@ -91,8 +98,8 @@ public class TescoSteps {
         loginWith(testUser, testPass);
     }
 
-    @Then("I am on the products page")
-    public void iAmOnTheProductsPage() {
+    @Then("I am on the webshop page")
+    public void iAmOnTheWebshopPage() {
         webShopPage.validatePage();
     }
 
@@ -103,7 +110,7 @@ public class TescoSteps {
 
     @Given("I am logged in")
     public void iAmLoggedIn() {
-        iAmOnTheProductsPage();
+        iAmOnTheWebshopPage();
         isTrolleyIconVisible();
     }
 
@@ -130,8 +137,13 @@ public class TescoSteps {
     }
 
     @When("I open {string} detail")
-    public void openProductDetail (String productName) {
+    public void openProductDetail(String productName) {
         productPage = webShopPage.clickOnProductName(productName);
+    }
+
+    @And("I am on the product page")
+    public void iAmOnTheProductPage() {
+        productPage.validatePage();
     }
 
     @Then("I can see the {string} on the product details page")
@@ -142,5 +154,43 @@ public class TescoSteps {
     @And("I can see the {string} of the product")
     public void isProductIngredientsVisible(String productIngredient) {
         productPage.validateIngredients(productIngredient);
+    }
+
+
+    @When("I open shopping trolley")
+    public void openShoppingTrolley() throws InterruptedException {
+        trolleyPage = productPage.clickOnTrolley();
+        Thread.sleep(5000);
+    }
+
+    @Then("I am on the {string} page")
+    public void iAmOnTheTrolleyPage(String header) {
+        trolleyPage.validatePage(header);
+    }
+
+    @When("I remove items from the trolley")
+    public void removeItemsFromTrolley() {
+        trolleyPage.emptyTrolley();
+    }
+
+    @Then("I can see that trolley is empty")
+    public void iCanSeeThatTrolleyIsEmpty() {
+        trolleyPage.validateEmptyTrolley();
+    }
+
+    @When("I add {integer} of {string} to the Trolley")
+    public void addProductToTrolley(String quantity, String productName) {
+        int quantityInt = Integer.valueOf(quantity);
+        searchProductWith(productName);
+        openProductDetail(productName);
+        iAmOnTheProductPage();
+        isProductOnDetailsPage(productName);
+        productPage.addProduct(quantityInt);
+    }
+
+    @Then("the {string} is added to my {string}")
+    public void isProductAddedToTrolley(String productName, String header) {
+        trolleyPage.validatePage(header);
+        trolleyPage.validateProduct(productName);
     }
 }

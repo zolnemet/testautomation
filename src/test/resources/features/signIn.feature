@@ -14,7 +14,7 @@ Feature: login
     Scenario: Login successful
       Given I am on the login page
       When I login account with "zoltan.n@freemail.hu" and "teszt.01"
-      Then I am on the products page
+      Then I am on the webshop page
       And I should see the Trolley icon
 
 #    Scenario: Login failed

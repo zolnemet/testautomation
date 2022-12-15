@@ -13,17 +13,15 @@ Feature: Searching products
       And login as test user
 
     Scenario: Search product
-      Given I am on the products page
+      Given I am on the webshop page
       When I search for a product with "Dreher Bitter Lager"
       Then I can see the "Dreher Bitter Lager" in results
-      And I sign out
 
     @DataTable
     Scenario Outline: Search product
-      Given I am on the products page
+      Given I am on the webshop page
       When I search for a product with "<product>"
       Then I can see the "<product>" in results
-      And I sign out
       Examples:
         | product                                   |
         | Gyermelyi spagetti 4 tojásos száraztészta |
