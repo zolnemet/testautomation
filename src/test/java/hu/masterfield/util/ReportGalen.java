@@ -9,7 +9,7 @@ import java.util.List;
 
 public class ReportGalen {
 
-    public void reportUpdate(LayoutReport layoutReport) {
+    public static void reportUpdate(LayoutReport layoutReport) {
         try {
             List<GalenTestInfo> tests = new LinkedList<>();
             GalenTestInfo test = GalenTestInfo.fromString("SauceDemo products page check");

@@ -4,6 +4,7 @@ import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
 import com.galenframework.api.Galen;
 import com.galenframework.reports.model.LayoutReport;
+import hu.masterfield.util.ReportGalen;
 import org.openqa.selenium.WebDriver;
 
 import static com.codeborne.selenide.Condition.*;
@@ -63,7 +64,7 @@ public class HomePage {
         // Galen check layout
         LayoutReport layoutReport;
         layoutReport = Galen.checkLayout(driver, "/specs/homeLayout.gspec", "desktop");
-        reportUpdate(layoutReport);
+        ReportGalen.reportUpdate(layoutReport);
 
     }
 

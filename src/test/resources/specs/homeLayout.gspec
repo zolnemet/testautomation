@@ -1,7 +1,5 @@
 @objects
     title           css .title
-    inventory_list  css .inventory_list
-    inventory_item* css div.inventory_item
 
 = Header section =
     @on desktop
