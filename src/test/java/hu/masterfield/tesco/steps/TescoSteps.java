@@ -12,6 +12,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 import static com.codeborne.selenide.Selenide.open;
@@ -35,6 +36,8 @@ public class TescoSteps {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-blink-features=AutomationControlled");
         System.setProperty("wdm.proxy", "HE202196.emea2.cds.t-internal.com:3128");
+        //options.setHeadless(true);
+        //WebDriverManager.chromedriver().setup();
         Configuration.browserCapabilities = options;
         //Configuration.reportsFolder = "target/screenshots";
     }
