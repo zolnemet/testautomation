@@ -73,21 +73,23 @@ public class LayoutDesktopSteps extends GalenJUnitTestBase {
         homePage.validateLayout();
     }
 
-//    @Test
-//    @DisplayName("TC2 - Tesco webshop page layout test")
-//    public void testWebShopPage() throws IOException {
-//        homePage = open(baseUrl, HomePage.class);
-//        homePage.validatePage();
-//        if (!homePage.getLang().equals("Magyar")) {
-//            homePage.changeLang();
-//        }
-//        loginPage = homePage.openLogin();
-//        loginPage.validatePage();
-//        String testUser = testData.getProperty("testUser");
-//        String codedTestPass = testData.getProperty("testPass");
-//        String testPass = Crypting.decrypt("Bar12345Bar12345", "RandomInitVector", codedTestPass);
-//        webShopPage = loginPage.loginAccount(testUser, testPass);
-//
-//        // webShopPage.validateLayout();
-//    }
+    @Test
+    @DisplayName("TC2 - Tesco webshop page layout test")
+    public void testWebShopPage() throws IOException {
+        homePage = open(baseUrl, HomePage.class);
+        homePage.validatePage();
+        if (!homePage.getLang().equals("Magyar")) {
+            homePage.changeLang();
+        }
+        loginPage = homePage.openLogin();
+        loginPage.validatePage();
+        String testUser = testData.getProperty("testUser");
+        String codedTestPass = testData.getProperty("testPass");
+        String testPass = Crypting.decrypt("Bar12345Bar12345", "RandomInitVector", codedTestPass);
+        webShopPage = loginPage.loginAccount(testUser, testPass);
+        webShopPage = webShopPage.search("bor");
+        webShopPage.validateProduct("bor");
+
+        webShopPage.validateLayout();
+    }
 }

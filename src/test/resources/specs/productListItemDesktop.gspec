@@ -1,0 +1,27 @@
+@objects
+    product_item_img              css a > div > picture > img
+    product_item_name             css div.product-details--wrapper > h3 > a > span
+    product_item_add              css .beans-quantity-controls__container > div > div > button
+    product_item_price            css .beans-price__container
+
+= Item section =
+
+    product_item_img:
+        width       120 to 150 px
+        height      120 to 150 px
+
+    product_item_img:
+        width       65 to 80 px
+        height      20 to 28 px
+
+    product_item_name:
+        inside      parent
+        width       400 to 500 px
+        height      35 to 50 px
+
+    product_item_add:
+        inside      parent
+        width       200 to 240 px
+        height      35 to 45 px
+        left-of     product_item_name 19px
+

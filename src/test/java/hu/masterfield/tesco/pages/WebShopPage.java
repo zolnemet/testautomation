@@ -1,6 +1,14 @@
 package hu.masterfield.tesco.pages;
 
 import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.WebDriverRunner;
+import com.galenframework.api.Galen;
+import com.galenframework.reports.model.LayoutReport;
+import hu.masterfield.util.ReportGalen;
+import org.openqa.selenium.WebDriver;
+
+import java.io.IOException;
+import java.util.Arrays;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Condition.enabled;
@@ -66,6 +74,14 @@ public class WebShopPage {
 
     public void validateMissingTrolley() {
         buttonTrolleyContent.shouldNot(exist);
+    }
+
+    public void validateLayout () throws IOException {
+        WebDriver driver = WebDriverRunner.getWebDriver();
+        // Galen check layout
+        LayoutReport layoutReport;
+        layoutReport = Galen.checkLayout(driver, "/specs/productsLayout.gspec", Arrays.asList(new String[]{"desktop"}));
+        ReportGalen.reportUpdate(layoutReport);
     }
 
 }

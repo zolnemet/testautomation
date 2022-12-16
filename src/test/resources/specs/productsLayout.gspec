@@ -1,17 +1,17 @@
 @objects
-    title           css .title
-    inventory_list  css .inventory_list
-    inventory_item* css div.inventory_item
+    brand_header_logo           css div.brand-header__logo > a > svg > g > path
+    product_list                css div.product-list-container
+    product_list_item*          css div.product-list-container > div.product-lists > div > div.search.product-list--page.product-list--current-page > div > ul
 
 = Header section =
     @on desktop
-        title:
-            width   120 to 130 px
-            height  25 to 30 px
+        brand_header_logo:
+            width   115 to 125 px
+            height  21 to 28 px
 
 = Products list =
     @on desktop
-        inventory_item*:
+        product_list_item*:
             component   inventoryItemDesktop.gspec
             width   460 to 480 px
             height  240 to 280 px

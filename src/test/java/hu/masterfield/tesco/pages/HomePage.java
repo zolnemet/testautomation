@@ -68,7 +68,6 @@ public class HomePage {
         LayoutReport layoutReport;
         layoutReport = Galen.checkLayout(driver, "/specs/homeLayout.gspec", Arrays.asList(new String[]{"desktop"}));
         ReportGalen.reportUpdate(layoutReport);
-
     }
 
 }
