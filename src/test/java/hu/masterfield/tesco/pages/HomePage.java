@@ -5,9 +5,6 @@ import com.codeborne.selenide.WebDriverRunner;
 import com.galenframework.api.Galen;
 import com.galenframework.reports.model.LayoutReport;
 import org.openqa.selenium.WebDriver;
-import hu.masterfield.util.ReportGalen;
-
-import java.util.Collections;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.*;
@@ -64,7 +61,8 @@ public class HomePage {
     public void validateLayout () {
         WebDriver driver = WebDriverRunner.getWebDriver();
         // Galen check layout
-        LayoutReport layoutReport = Galen.checkLayout(driver, "/specs/productsLayout.gspec", "desktop");
+        LayoutReport layoutReport;
+        layoutReport = Galen.checkLayout(driver, "/specs/homeLayout.gspec", "desktop");
         reportUpdate(layoutReport);
 
     }

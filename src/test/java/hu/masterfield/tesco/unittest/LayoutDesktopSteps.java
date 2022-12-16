@@ -11,6 +11,7 @@ import hu.masterfield.tesco.TestDevice;
 import hu.masterfield.tesco.pages.HomePage;
 import hu.masterfield.tesco.pages.LoginPage;
 import hu.masterfield.tesco.pages.WebShopPage;
+import hu.masterfield.tesco.steps.TescoSteps;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import org.junit.jupiter.api.*;
@@ -27,6 +28,7 @@ import java.io.IOException;
 import java.time.Duration;
 import java.util.Arrays;
 
+import static com.codeborne.selenide.Selenide.open;
 import static hu.masterfield.tesco.TestData.testData;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -66,7 +68,8 @@ public class LayoutDesktopSteps extends GalenJUnitTestBase {
     @Test
     @DisplayName("TC1 - Tesco home page layout test")
     public void test() throws IOException {
-
-
+        homePage = open(baseUrl, HomePage.class);
+        homePage.validatePage();
+        homePage.validateLayout();
     }
 }
