@@ -12,7 +12,7 @@ public class ReportGalen {
     public static void reportUpdate(LayoutReport layoutReport) {
         try {
             List<GalenTestInfo> tests = new LinkedList<>();
-            GalenTestInfo test = GalenTestInfo.fromString("SauceDemo products page check");
+            GalenTestInfo test = GalenTestInfo.fromString("Tesco products page check");
             test.getReport().layout(layoutReport, "Verify products layout");
             tests.add(test);
             new HtmlReportBuilder().build(tests, "target/galen-html-reports");

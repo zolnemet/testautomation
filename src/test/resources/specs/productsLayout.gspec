@@ -1,0 +1,17 @@
+@objects
+    title           css .title
+    inventory_list  css .inventory_list
+    inventory_item* css div.inventory_item
+
+= Header section =
+    @on desktop
+        title:
+            width   120 to 130 px
+            height  25 to 30 px
+
+= Products list =
+    @on desktop
+        inventory_item*:
+            component   inventoryItemDesktop.gspec
+            width   460 to 480 px
+            height  240 to 280 px

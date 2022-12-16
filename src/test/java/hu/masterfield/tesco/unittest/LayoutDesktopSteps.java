@@ -7,11 +7,11 @@ import com.galenframework.junit.GalenJUnitTestBase;
 import com.galenframework.reports.GalenTestInfo;
 import com.galenframework.reports.HtmlReportBuilder;
 import com.galenframework.reports.model.LayoutReport;
-import hu.masterfield.tesco.TestDevice;
 import hu.masterfield.tesco.pages.HomePage;
 import hu.masterfield.tesco.pages.LoginPage;
 import hu.masterfield.tesco.pages.WebShopPage;
 import hu.masterfield.tesco.steps.TescoSteps;
+import hu.masterfield.util.Crypting;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import org.junit.jupiter.api.*;
@@ -67,9 +67,27 @@ public class LayoutDesktopSteps extends GalenJUnitTestBase {
 
     @Test
     @DisplayName("TC1 - Tesco home page layout test")
-    public void test() throws IOException {
+    public void testHomePage() throws IOException {
         homePage = open(baseUrl, HomePage.class);
         homePage.validatePage();
         homePage.validateLayout();
     }
+
+//    @Test
+//    @DisplayName("TC2 - Tesco webshop page layout test")
+//    public void testWebShopPage() throws IOException {
+//        homePage = open(baseUrl, HomePage.class);
+//        homePage.validatePage();
+//        if (!homePage.getLang().equals("Magyar")) {
+//            homePage.changeLang();
+//        }
+//        loginPage = homePage.openLogin();
+//        loginPage.validatePage();
+//        String testUser = testData.getProperty("testUser");
+//        String codedTestPass = testData.getProperty("testPass");
+//        String testPass = Crypting.decrypt("Bar12345Bar12345", "RandomInitVector", codedTestPass);
+//        webShopPage = loginPage.loginAccount(testUser, testPass);
+//
+//        // webShopPage.validateLayout();
+//    }
 }

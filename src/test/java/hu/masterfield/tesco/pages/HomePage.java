@@ -7,6 +7,9 @@ import com.galenframework.reports.model.LayoutReport;
 import hu.masterfield.util.ReportGalen;
 import org.openqa.selenium.WebDriver;
 
+import java.io.IOException;
+import java.util.Arrays;
+
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
@@ -59,11 +62,11 @@ public class HomePage {
         buttonCookies.shouldNotBe(exist);
     }
 
-    public void validateLayout () {
+    public void validateLayout () throws IOException {
         WebDriver driver = WebDriverRunner.getWebDriver();
         // Galen check layout
         LayoutReport layoutReport;
-        layoutReport = Galen.checkLayout(driver, "/specs/homeLayout.gspec", "desktop");
+        layoutReport = Galen.checkLayout(driver, "/specs/homeLayout.gspec", Arrays.asList(new String[]{"desktop"}));
         ReportGalen.reportUpdate(layoutReport);
 
     }
