@@ -181,14 +181,13 @@ public class TescoSteps {
         trolleyPage.validateEmptyTrolley();
     }
 
-    @When("I add {integer} of {string} to the Trolley")
-    public void addProductToTrolley(String quantity, String productName) {
-        int quantityInt = Integer.valueOf(quantity);
+    @When("I add {int} of {string} to the Trolley")
+    public void addProductToTrolley(int quantity, String productName) {
         searchProductWith(productName);
         openProductDetail(productName);
         iAmOnTheProductPage();
         isProductOnDetailsPage(productName);
-        productPage.addProduct(quantityInt);
+        productPage.addProduct(quantity);
     }
 
     @Then("the {string} is added to my {string}")
